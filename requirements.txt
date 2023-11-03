@@ -1,0 +1,5 @@
+pandas
+datamart_profiler==0.11
+openai==0.27.8
+tiktoken==0.4.0
+utils==1.0.1
