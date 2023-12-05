@@ -11,7 +11,7 @@ class Profiler:
     def get_context(self):
         return self.context
 
-    def build_context(self, df, use_profiler, sample_size):
+    def build_context(self, df, use_profiler, sample_size, title):
             if sample_size is None:
                 sample_size = self.sample_size
             try:
@@ -25,7 +25,7 @@ class Profiler:
                     df_sample = df
                 sample = df_sample.to_csv(index=False)
 
-                context=self.form_context(self.contextArr, sample, use_profiler)
+                context=self.form_context(self.contextArr, sample, use_profiler, title)
                 num_tokens = self.num_tokens_from_string(context)
 
                 # Decrease the sample size iteratively until the number of tokens is less than or equal to 4000
@@ -38,7 +38,7 @@ class Profiler:
                         df_sample = df
                     sample = df_sample.to_csv(index=False)
 
-                    context = self.form_context(self.contextArr, sample, use_profiler)
+                    context = self.form_context(self.contextArr, sample, use_profiler, title)
                     num_tokens = self.num_tokens_from_string(context)
             except Exception as e:
                 print(f"An exception occurred: {e}")
@@ -92,9 +92,9 @@ class Profiler:
         return contextDict
     
     @staticmethod
-    def form_context(contextDict,sample,use_profiler):
+    def form_context(contextDict,sample,use_profiler,title):
         if not use_profiler:
-            return "Dataset sample: \n" + sample
+            return "Dataset title: " + title + "\nDataset sample: \n" + sample
         
         result=""
 
@@ -122,7 +122,7 @@ class Profiler:
                 result+=". "
             result+="\n"
         
-        final = "Dataset sample: \n" + sample + "\n\n" + "Column profiling: \n" + result
+        final = "Dataset title: " + title + "\nDataset sample: \n" + sample + "\nColumn profiling: \n" + result
         return final
     
     def num_tokens_from_string(self, string, encoding_name="gpt-3.5-turbo"):

@@ -53,7 +53,7 @@ class AutoDescription:
                     {
                         "role": "user", 
                         "content": "Answer the questions while using the input and context.\
-                                    The input are the hearders, a random sample, and profiler result of the large dataset. \
+                                    The input includes dataset title, hearders, a random sample, and profiler result of the large dataset. \
                                     The context are.\n"+context+"\
                                 Question:Describe the dataset in sentences.\nAnswer:"},
                 ],
@@ -72,7 +72,7 @@ class AutoDescription:
                     {
                         "role": "user", 
                         "content": "Answer the questions while using the input and context.\
-                                    The input are the hearders and a random sample of the large dataset. \
+                                    The input includes dataset title, hearders and a random sample of the large dataset. \
                                     The context are.\n"+context+"\
                                 Question:Describe the dataset in sentences.\nAnswer:"},
                 ],
@@ -91,9 +91,9 @@ class AutoDescription:
                     {
                         "role": "user", 
                         "content": "Answer the questions while using the input and context.\
-                                    The input are the hearders, a random sample, and profiler result of the large dataset. \
+                                    The input includes dataset title, hearders, a random sample, and profiler result of the large dataset. \
                                     The context are.\n"+context+"\
-                                    The instructions are:\
+                                    The nine aspects are:\
                                     1. Describe the dataset in one sentence?\
                                     2. What does the dataset look like?\
                                     3. Can you group the headers?\
@@ -103,7 +103,7 @@ class AutoDescription:
                                     7. In what format or in what way does the dataset mention location?\
                                     8. Is there anything unclear about the data, or do you have reason to doubt the quality?\
                                     9. Is there anything that you can point out or analyse in more detail?\
-                                Question:Describe the dataset answering the nine questions above in one compelete and coherentparagraph.\nAnswer:"},
+                                Question:Describe the dataset answering the nine questions above in one compelete and coherent paragraph.\nAnswer:"},
                 ],
             temperature=0.3)
         description_content = description.choices[0]['message']['content']
