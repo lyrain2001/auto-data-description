@@ -10,6 +10,7 @@ except ImportError:
 
 def process_file(input_path, sample_size):
     df = pd.read_csv(input_path)
+    print(f"Processing {input_path}...")
     profiler = Profiler()
     return profiler.build_context(df, sample_size)
 
@@ -17,7 +18,7 @@ def main():
     parser = argparse.ArgumentParser(description='Generate context for multiple datasets')
     parser.add_argument('--input_dir', type=str, help='input directory path')
     parser.add_argument('--output', type=str, help='output file path')
-    parser.add_argument('--sample_size', type=int, default=1000, help='sample size')
+    parser.add_argument('--sample_size', type=int, default=10, help='sample size')
     args = parser.parse_args()
 
     with open(args.output, 'w') as f:

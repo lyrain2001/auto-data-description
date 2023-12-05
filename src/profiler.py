@@ -1,3 +1,4 @@
+import tiktoken
 import datamart_profiler
 from datetime import datetime
 
@@ -6,11 +7,15 @@ class Profiler:
         self.sample_size = sample_size
         self.context = ""
         self.contextArr = []
+        
+    def get_context(self):
+        return self.context
 
     def build_context(self, df, sample_size=None):
             if sample_size is None:
                 sample_size = self.sample_size
             try:
+                print("Profiling...")
                 contextArr = self.profiler(df)
                 self.contextArr = contextArr
                 if sample_size <= len(df):
@@ -44,6 +49,7 @@ class Profiler:
     @staticmethod
     def profiler(data_frame):
         metadata = datamart_profiler.process_dataset(data_frame)
+        print("Profiling done, generating stats...")
         contextDict = {}
 
         contextArr=[]
@@ -83,3 +89,39 @@ class Profiler:
 
         contextDict['attribute_keywords'] = metadata['attribute_keywords']
         return contextDict
+    
+    @staticmethod
+    def form_context(contextDict,sample):
+        result=""
+
+        temporal_columns = []
+        if 'temporal_coverage' in contextDict.keys():
+            for d in contextDict['temporal_coverage']:
+                temporal_columns += d['column_names']
+                result+="Column "+d['column_names'][0]+" is a time column with temporal resolution in "+d['temporal_resolution']+". "
+                result+="The temporal coverage is from "+d['ranges'][0]+" to "+d['ranges'][1]+". "
+                result+="\n"
+
+        for d in contextDict['columns']:
+            if d['name'] in temporal_columns:
+                continue
+            result+="Column "+d['name']+" is a "+d['structural_type']+". "
+            if('num_distinct_values' in d.keys()):
+                result+="There are "+str(d['num_distinct_values'])+" distinct values. "
+            if('coverage' in d.keys()):
+                result+="The range of values is from "+str(d['coverage'][0])+" to "+str(d['coverage'][1])+". "
+            if len(d['semantic_types'])>0:
+                result+="The semantic types are: "
+                for s in d['semantic_types']:
+                    result+=s+", "
+                result=result[:-2]
+                result+=". "
+            result+="\n"
+        
+        final = "Dataset sample: \n" + sample + "\n\n" + "Column profiling: \n" + result
+        return final
+    
+    def num_tokens_from_string(self, string, encoding_name="gpt-3.5-turbo"):
+        encoding = tiktoken.encoding_for_model(encoding_name)
+        num_tokens = len(encoding.encode(string))
+        return num_tokens
