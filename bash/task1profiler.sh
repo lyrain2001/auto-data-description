@@ -10,5 +10,8 @@ PYTHON_SCRIPT="../src/generate_context.py"
 # Sample size
 SAMPLE_SIZE=10
 
+# Profiler
+PROFILER=False
+
 # Run the Python script
 python $PYTHON_SCRIPT --input_dir $DATASETS_DIR --output $OUTPUT_FILE --sample_size $SAMPLE_SIZE
