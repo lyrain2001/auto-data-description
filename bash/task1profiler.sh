@@ -2,7 +2,7 @@
 
 # Define the directory containing the datasets and output file path
 DATASETS_DIR="../../dataset/task1data"
-OUTPUT_FILE="task1_sample.txt"
+OUTPUT_FILE="../samples/task1_sample.txt"
 
 # Path to your Python script
 PYTHON_SCRIPT="../src/generate_context.py"
