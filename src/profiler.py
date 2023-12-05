@@ -11,20 +11,21 @@ class Profiler:
     def get_context(self):
         return self.context
 
-    def build_context(self, df, sample_size=None):
+    def build_context(self, df, use_profiler, sample_size):
             if sample_size is None:
                 sample_size = self.sample_size
             try:
                 print("Profiling...")
-                contextArr = self.profiler(df)
-                self.contextArr = contextArr
+                if use_profiler:
+                    contextArr = self.profiler(df)
+                    self.contextArr = contextArr
                 if sample_size <= len(df):
                     df_sample = df.sample(sample_size)
                 else:
                     df_sample = df
                 sample = df_sample.to_csv(index=False)
 
-                context=self.form_context(contextArr,sample)
+                context=self.form_context(self.contextArr, sample, use_profiler)
                 num_tokens = self.num_tokens_from_string(context)
 
                 # Decrease the sample size iteratively until the number of tokens is less than or equal to 4000
@@ -37,7 +38,7 @@ class Profiler:
                         df_sample = df
                     sample = df_sample.to_csv(index=False)
 
-                    context = self.form_context(contextArr, sample)
+                    context = self.form_context(self.contextArr, sample, use_profiler)
                     num_tokens = self.num_tokens_from_string(context)
             except Exception as e:
                 print(f"An exception occurred: {e}")
@@ -91,7 +92,10 @@ class Profiler:
         return contextDict
     
     @staticmethod
-    def form_context(contextDict,sample):
+    def form_context(contextDict,sample,use_profiler):
+        if not use_profiler:
+            return "Dataset sample: \n" + sample
+        
         result=""
 
         temporal_columns = []
