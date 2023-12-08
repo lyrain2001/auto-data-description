@@ -59,7 +59,7 @@ The input includes dataset title, headers, a random sample, and profiler result 
 Input:
 """ + context + """
 Question:
-Describe the dataset in sentences.
+Provide a detailed analysis in one coherent and structured paragraph.
 
 Answer: """},
                 ],
@@ -84,7 +84,7 @@ The input includes dataset title, headers and a random sample of the large datas
 Input:
 """ + context + """
 Question:
-Describe the dataset in sentences.
+Provide a detailed analysis in one coherent and structured paragraph.
 
 Answer: """},
                 ],
@@ -110,16 +110,15 @@ Input:
 """ + context + """
 Question:
 Considering the following nine aspects:
-1. Describe the dataset in one sentence?
-2. What does the dataset look like?
-3. Can you group the headers?
-4. What are the value types and value ranges for the most important headers?
-5. Where is the data from?
-6. In what format or in what way does the dataset mention time?
-7. In what format or in what way does the dataset mention location?
-8. Is there anything unclear about the data, or do you have reason to doubt the quality?
-9. Is there anything that you can point out or analyse in more detail?
-Describe the dataset answering the nine aspects above in one complete and coherent paragraph.
+1. Summarize the dataset's overall content and purpose in one sentence.
+2. Offer an overview of its structure, including data types and general organization.
+3. Identify and group the dataset's headers, explaining their relevance and interrelationships.
+4. Detail the value types and range for key headers, emphasizing significant trends or patterns.
+5. Describe how the dataset represents time, including the format and temporal scope.
+6. Explain the representation of location in the dataset, noting specific formats or geospatial details.
+7. Discuss any ambiguities or quality concerns in the data, providing examples where necessary.
+8. Highlight any notable findings or potential areas for deeper analysis, based on your initial review.
+Provide a detailed analysis covering the following aspects in one coherent and structured paragraph:
 
 Answer: """},
                 ],
