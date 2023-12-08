@@ -118,7 +118,7 @@ Considering the following nine aspects:
 6. Explain the representation of location in the dataset, noting specific formats or geospatial details.
 7. Discuss any ambiguities or quality concerns in the data, providing examples where necessary.
 8. Highlight any notable findings or potential areas for deeper analysis, based on your initial review.
-Provide a detailed analysis covering the following aspects in one coherent and structured paragraph:
+Describe the dataset covering the nine aspects above in one complete and coherent paragraph.
 
 Answer: """},
                 ],

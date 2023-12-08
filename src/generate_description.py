@@ -56,7 +56,7 @@ def main():
     parser.add_argument('--task_name', type=str, default='task1', help='Task name (i.e. task1)')
 
     args = parser.parse_args()
-    OPENAI_API_KEY = "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"
+    OPENAI_API_KEY = "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"
 
     generator = DescriptionGenerator(OPENAI_API_KEY, args.task_name)
     generator.generate_and_write_descriptions()
