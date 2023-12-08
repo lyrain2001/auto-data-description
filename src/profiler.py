@@ -92,38 +92,45 @@ class Profiler:
         return contextDict
     
     @staticmethod
-    def form_context(contextDict,sample,use_profiler,title):
+    def form_context(contextDict, sample, use_profiler, title):
         if not use_profiler:
             return "Dataset title: " + title + "\nDataset sample: \n" + sample
         
-        result=""
+        result = ""
+        
+        max_num = 5
+        count = 0
 
         temporal_columns = []
         if 'temporal_coverage' in contextDict.keys():
             for d in contextDict['temporal_coverage']:
                 temporal_columns += d['column_names']
-                result+="Column "+d['column_names'][0]+" is a time column with temporal resolution in "+d['temporal_resolution']+". "
-                result+="The temporal coverage is from "+d['ranges'][0]+" to "+d['ranges'][1]+". "
-                result+="\n"
-
-        for d in contextDict['columns']:
-            if d['name'] in temporal_columns:
-                continue
-            result+="Column "+d['name']+" is a "+d['structural_type']+". "
-            if('num_distinct_values' in d.keys()):
-                result+="There are "+str(d['num_distinct_values'])+" distinct values. "
-            if('coverage' in d.keys()):
-                result+="The range of values is from "+str(d['coverage'][0])+" to "+str(d['coverage'][1])+". "
-            if len(d['semantic_types'])>0:
-                result+="The semantic types are: "
-                for s in d['semantic_types']:
-                    result+=s+", "
-                result=result[:-2]
-                result+=". "
-            result+="\n"
+                result += "Column " + d['column_names'][0] + " is a time column with temporal resolution in " + d['temporal_resolution'] + ". "
+                result += "The temporal coverage is from " + d['ranges'][0] + " to " + d['ranges'][1] + ". \n"
+                count += 1
+        
+        if count < max_num:
+            for d in contextDict['columns']:
+                if d['name'] in temporal_columns:
+                    continue
+                if count >= max_num:
+                    break
+                result += "Column " + d['name'] + " is a " + d['structural_type'] + ". "
+                if 'num_distinct_values' in d.keys():
+                    result += "There are " + str(d['num_distinct_values']) + " distinct values. "
+                if 'coverage' in d.keys():
+                    result += "The range of values is from " + str(d['coverage'][0]) + " to " + str(d['coverage'][1]) + ". "
+                if len(d['semantic_types']) > 0:
+                    result += "The semantic types are: "
+                    for s in d['semantic_types']:
+                        result += s + ", "
+                    result = result[:-2] + ". "
+                result += "\n"
+                count += 1
         
         final = "Dataset title: " + title + "\nDataset sample: \n" + sample + "\nColumn profiling: \n" + result
         return final
+
     
     def num_tokens_from_string(self, string, encoding_name="gpt-3.5-turbo"):
         encoding = tiktoken.encoding_for_model(encoding_name)

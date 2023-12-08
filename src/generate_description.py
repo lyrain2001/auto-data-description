@@ -34,9 +34,9 @@ class DescriptionGenerator:
         profiler_contexts = self.load_sample_txt(profiler_filename)
         sample_contexts = self.load_sample_txt(sample_filename)
 
-        with open(f'../results/{self.task_name}_result_profiler.txt', 'w') as profiler_file, \
-            open(f'../results/{self.task_name}_result_sample.txt', 'w') as sample_file, \
-            open(f'../results/{self.task_name}_result_template.txt', 'w') as template_file:
+        with open(f'../results/{self.task_name}_gpt3.5_p1.txt', 'w') as profiler_file, \
+            open(f'../results/{self.task_name}_gpt3.5_p2.txt', 'w') as sample_file, \
+            open(f'../results/{self.task_name}_gpt3.5_p3.txt', 'w') as template_file:
                 
             for sample_context in sample_contexts:
                 print("Generating description with only samples for", sample_context[0])
@@ -56,7 +56,7 @@ def main():
     parser.add_argument('--task_name', type=str, default='task1', help='Task name (i.e. task1)')
 
     args = parser.parse_args()
-    OPENAI_API_KEY = "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"
+    OPENAI_API_KEY = "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"
 
     generator = DescriptionGenerator(OPENAI_API_KEY, args.task_name)
     generator.generate_and_write_descriptions()

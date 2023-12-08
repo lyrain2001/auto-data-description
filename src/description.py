@@ -54,7 +54,7 @@ class AutoDescription:
                         "role": "user", 
                         "content": """Instruction:
 Answer the questions while using the input and context.
-The input includes dataset title, hearders, a random sample, and profiler result of the large dataset.
+The input includes dataset title, headers, a random sample, and profiler result of the large dataset.
 
 Input:
 """ + context + """
@@ -79,7 +79,7 @@ Answer: """},
                         "role": "user", 
                         "content": """Instruction:
 Answer the questions while using the input and context.
-The input includes dataset title, hearders and a random sample of the large dataset.
+The input includes dataset title, headers and a random sample of the large dataset.
 
 Input:
 """ + context + """
@@ -104,7 +104,7 @@ Answer: """},
                         "role": "user", 
                         "content": """Instruction:
 Answer the questions while using the input and context.
-The input includes dataset title, hearders, a random sample, and profiler result of the large dataset. 
+The input includes dataset title, headers, a random sample, and profiler result of the large dataset. 
 
 Input:
 """ + context + """
@@ -119,7 +119,7 @@ Considering the following nine aspects:
 7. In what format or in what way does the dataset mention location?
 8. Is there anything unclear about the data, or do you have reason to doubt the quality?
 9. Is there anything that you can point out or analyse in more detail?
-Describe the dataset answering the nine aspects above in one compelete and coherent paragraph.
+Describe the dataset answering the nine aspects above in one complete and coherent paragraph.
 
 Answer: """},
                 ],
