@@ -59,7 +59,7 @@ The input includes dataset title, headers, a random sample, and profiler result 
 Input:
 """ + context + """
 Question:
-Provide a detailed analysis in one coherent and structured paragraph.
+Describe the dataset covering the nine aspects above in one complete and coherent paragraph.
 
 Answer: """},
                 ],
@@ -84,7 +84,7 @@ The input includes dataset title, headers and a random sample of the large datas
 Input:
 """ + context + """
 Question:
-Provide a detailed analysis in one coherent and structured paragraph.
+Describe the dataset covering the nine aspects above in one complete and coherent paragraph.
 
 Answer: """},
                 ],
